@@ -14,6 +14,7 @@ rollbar = "^0.15.1"
 requests = "^2.24.0"
 python-dotenv = "^0.14.0"
 django-bootstrap4 = "^2.2.0"
+heroku = "^0.1.4"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.8.3"
@@ -21,9 +22,6 @@ pytest = "^6.0.1"
 pytest-cov = "^2.10.1"
 coverage = "^5.2.1"
 gunicorn = "^20.0.4"
-
-[tool.poetry.scripts]
-taskmanager = 'task_manager.script.taskmanager:main'
 
 [build-system]
 requires = ["poetry>=0.12"]

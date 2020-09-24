@@ -2,7 +2,7 @@ install:
 	poetry install
 
 lint:
-	poetry run flake8
+	poetry run flake8 task_manager/
 
 test:
 	poetry run --source='.' manage.py test
