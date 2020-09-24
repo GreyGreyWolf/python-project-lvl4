@@ -133,7 +133,3 @@ ROLLBAR = {
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-if '/app' in os.environ['HOME']:
-    import django_heroku
-    django_heroku.settings(locals())
