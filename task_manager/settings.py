@@ -122,7 +122,7 @@ USE_L10N = True
 USE_TZ = True
 
 ROLLBAR = {
-    'access_token': 'POST_SERVER_ITEM_ACCESS_TOKEN',
+    'access_token': os.getenv("POST_SERVER_ITEM_ACCESS_TOKEN"),
     'environment': 'development' if DEBUG else 'production',
     'branch': 'master',
     'root': '/absolute/path/to/code/root',
@@ -134,3 +134,6 @@ ROLLBAR = {
 
 STATIC_URL = '/static/'
 
+if '/app' in os.environ['HOME']:
+    import django_heroku
+    django_heroku.settings(locals())
