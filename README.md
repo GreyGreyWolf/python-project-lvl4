@@ -30,5 +30,5 @@ The application is locally available at [http://127.0.0.1:8000]
 
 # Usage example
 
-You can watch it at work here: 
+You can watch it at work here: https://greywolf-task-manager.herokuapp.com/
 
