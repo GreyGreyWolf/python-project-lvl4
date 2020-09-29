@@ -20,6 +20,13 @@ SECRET_KEY = !Key for Django settings!
 POST_SERVER_ITEM_ACCESS_TOKEN = !Token for your rollbar account!
 ```
 
+After this:
+```
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py creatsuperuser
+```
+
 For start application:
 
 ```
