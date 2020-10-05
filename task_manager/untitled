@@ -1,0 +1,17 @@
+from django.shortcuts import render
+
+pages = {"signin": "signin.html", "signup": "signup.html"}
+
+
+def index(request):
+    if request in pages:
+        page = pages[request]
+    else:
+        page = "main.html"
+    
+    return render(request, page)
+
+
+
+print(index('main'))
+
