@@ -1,10 +1,10 @@
-from django.contrib import admin
-from django.conf.urls import url
+from django.urls import path
 from users import views
 
-urlpatterns = [
-    url(r'^signin/$', views.login),
-    url(r'^signup/$', views.register),
-    
-]
 
+app_name = 'users'
+urlpatterns = [
+    path('register/', views.register),
+    path('dashboard/', views.dashboard),
+    path('escape/', views.logout),
+]
