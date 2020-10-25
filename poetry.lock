@@ -216,7 +216,7 @@ python = "<3.8"
 version = "*"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "WSGI HTTP Server for UNIX"
 name = "gunicorn"
 optional = false
@@ -525,7 +525,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pytest-cov", "jaraco.test (>=3.2.0)", "jaraco.itertools", "func-timeout", "pytest-black (>=0.3.7)", "pytest-mypy"]
 
 [metadata]
-content-hash = "4536c542cb3094b7b0ddff8265367527eab05abc3ab417182c46b288468d9d02"
+content-hash = "ee27e68d7f167f8826f30d94397ba6b0b4d9e745d2b9f935054621f229345c8e"
 lock-version = "1.0"
 python-versions = "^3.6"
 
