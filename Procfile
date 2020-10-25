@@ -1,1 +1,2 @@
-web: gunicorn task_manager.wsgi --log-file -
+werelease: python manage.py migrate
+web: gunicorn task_manager.wsgi
