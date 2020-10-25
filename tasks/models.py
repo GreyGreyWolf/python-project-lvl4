@@ -1,47 +1,42 @@
 from django.db import models
-from users.models import User
+from django.contrib.auth.models import User
 
 
 class Taskstatus(models.Model):
-    LIST_STATUSES = [
-        ('NEW', 'New'),
-        ('IN_WORK', 'In work'),
-        ('ON_TESTING', 'On testing'),
-        ('COMPLETED', 'Completed'),
-    ]
-    name = models.CharField(max_length=15, blank=False, null=False, choices=LIST_STATUSES, default='NEW')
+
+    name = models.CharField(max_length=100)
     
     def __str__(self):
-        return "Status %s" % self.name
+        return self.name
     
     class Meta:
         verbose_name = "Status"
-        verbose_name_plural = "Task status"
+        verbose_name_plural = "Statuses"
     
     
 class Tag(models.Model):
-    name = models.CharField(max_length=20, blank=False, null=False, unique=True)
+    name = models.CharField(max_length=20, unique=True)
     
     def __str__(self):
-        return "Tag %s" % self.name
+        return self.name
     
     
 class Task(models.Model):
-    name = models.CharField(max_length=50, blank=False, null=False)
-    description = models.TextField(max_length=128, blank=True, null=True, default=None)
-    status = models.ForeignKey(Taskstatus,default=1, on_delete=models.CASCADE,
-                              related_name="status")
+    name = models.CharField(max_length=50)
+    description = models.TextField(max_length=128, blank=True)
+    status = models.ForeignKey(Taskstatus, default=1, on_delete=models.CASCADE,
+                              related_name='statuses')
     creator = models.ForeignKey(User, on_delete=models.CASCADE, 
-                                    related_name ="creator")
+                                    related_name ="creators")
     assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, 
                                     related_name ="assigned_to")
-    tags = models.ManyToManyField(Tag,related_name="tags", blank=True)
+    tags = models.ManyToManyField(Tag, related_name="tags")
     
     def __str__(self):
-        return "%s %s %s %s" % (self.name, self.status, self.assigned_to, self.creator)
+        return self.name
     
     
     class Meta:
         verbose_name = "Task"
         verbose_name_plural = "Tasks"
-        
+
