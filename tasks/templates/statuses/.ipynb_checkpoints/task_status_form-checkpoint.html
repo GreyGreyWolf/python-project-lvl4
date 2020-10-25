@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Status form{% endblock %}
+{% block content %}
+    <div class="container middle-container">
+        <div class="row">
+            <div class="col-4 offset-4">
+                <form action="{% url 'tasks:task_status_add' %}" method="post" class="form text-center">{% csrf_token %}
+
+
+                <div class="form-group">
+                    <h1>Enter status: </h1>
+                    <input type="text" name="{{ form.name.name }}" class="form-control" placeholder="Enter your status">
+                </div>
+
+
+                    
+                <button class="btn btn-primary btn-white" type="submit">Save</button>
+                    
+                </form>
+                    
+            </div>
+        </div>
+    </div>
+{% endblock %}

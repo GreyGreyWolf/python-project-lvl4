@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Task list{% endblock %}
+{% block content %}
+
+
+<main role="main" class="inner cover">
+    <!-- Filters -->
+    <form method="GET" class="mt-3" action=".">{% csrf_token %}
+
+        <!-- Filter row -->
+        <div class="form-inline justify-content-center mt-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Assigned to</span>
+            </div>
+            <select id="assigned_to" class="form-control task-control col-2 mr-2" name="assigned_to">
+                {% for user in filter.form.assigned_to %}
+                {{ user }}
+                {% endfor %} 
+            </select>
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Statuses</span>
+            </div>
+            <select id="status" class="form-control task-control col-2 mr-2" name="status">
+                {% for param in filter.form.status %}
+                {{ param }}
+                {% endfor %}
+            </select>
+            <select id="tags" class="form-control task-control col-2 mr-2" name="tags"> 
+                <option selected>Tags</option>
+                {% for tag in filter.form.tags %}
+                {{ tag }}
+                {% endfor %}
+            </select>
+                <button class="btn btn-primary btn-white mr-2" type="submit">Search</button>
+                <a href="{% url 'tasks:task_list' %}" class="btn btn-primary btn-white mr-2">Reset</a>
+        </div>
+    </form>
+
+    <!-- Head of task container -->
+    <div class="row my-3 border-bottom border-secondary text-left">
+        <div class="col-3 ">Name</div>
+        <div class="col-1 ">Creator</div>
+        <div class="col-1 ">Assigned</div>
+        <div class="col-3 ">Description</div>
+        <div class="col-2 ">Status</div>
+        <div class="col-2 ">Tags</div>
+    </div>
+
+    <!-- Tasks -->
+    {% if filter.qs|length > 0 %}
+    {% for task in filter.qs %}
+        <div class="row row-hover mb-2 text-left position-relative">
+                <div class="col-3 position-static"><a class="stretched-link text-decoration-none" href="{% url 'tasks:task_detail' task.id %}">{{ task.name|truncatewords:10  }}</a></div>
+                <div class="col-1 text-truncate ">{{ task.creator }}</div>
+                <div class="col-1  text-truncate">{{ task.assigned_to }}</div>
+                <div class="col-3 ">{{ task.description|linebreaks|truncatewords:15 }}</div>
+                <div class="col-2  text-truncate">{{ task.status }}</div>
+                <div class="col-2 ">{{ task.tags.all|join:", "|truncatewords:3 }}</div>
+        </div>
+    {% endfor %}
+    {% else %}
+    <p>No tasks</p>
+    {% endif %}
+
+    <!-- Buttons "My tasks" and "Add task" -->
+    <form method="GET" class="mt-3" action=".">{% csrf_token %}
+        <div class="row justify-content-center mt-4">
+                <a href="{% url 'tasks:task_add' %}" class="btn btn-primary mr-2">Add task</a>
+                <a href="{% url 'tasks:task_list' %}?assigned_to={{request.user.pk}}" class="btn btn-primary mr-2">My tasks</a>
+        </div>
+    </form>
+</main>
+
+{% endblock %}

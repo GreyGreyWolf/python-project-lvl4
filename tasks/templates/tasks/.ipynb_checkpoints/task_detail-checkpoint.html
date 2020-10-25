@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{task.name}}{% endblock %}
+{% block content %}
+
+
+    <div class="row my-3 border-bottom border-secondary text-left">
+        <div class="col-3 ">Name</div>
+        <div class="col-1 ">Creator</div>
+        <div class="col-1 ">Assigned</div>
+        <div class="col-3 ">Description</div>
+        <div class="col-2 ">Status</div>
+        <div class="col-2 ">Tags</div>
+    </div>
+
+        <div class="row row-hover mb-2 text-left position-relative">
+                <div class="col-3 position-static"><a class="stretched-link text-decoration-none" href="">
+                    {{ object.name }}</a></div>
+                <div class="col-1 text-truncate ">{{ object.creator }}</div>
+                <div class="col-1  text-truncate">{{ object.assigned_to }}</div>
+                <div class="col-3 ">{{ object.description }}</div>
+                <div class="col-2  text-truncate">{{ object.status }}</div>
+                {% for tag in object.tags.all %}
+                    <div class="col-2 ">{{tag}}</div>
+                {% endfor %}
+        </div>
+
+
+        <div class="row justify-content-center mt-4">
+            <form method="GET" action="{% url 'tasks:task_delete' task.id %}">{% csrf_token %}
+                <button class="btn btn-primary mr-2" type='submit'>Delete</button>
+            </form>
+            <form method="GET" action="{% url 'tasks:task_edit' task.id %}">{% csrf_token %}
+                <button class="btn btn-primary mr-2" type='submit'>Edit task</button>
+            </form>
+        </div>
+
+
+{% endblock %}
