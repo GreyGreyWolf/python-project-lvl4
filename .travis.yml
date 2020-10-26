@@ -1,6 +1,9 @@
 language: python
 python: 3.6
 
+services:
+  - postgresql
+
 env:
   global:
     - CC_TEST_REPORTER_ID=f5d78b7f43c063721b85818800cc3670dc89c4cd22d1efb421ccac608f9a60eb
@@ -18,8 +21,8 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-    - export SECRET_KEY=$SECRET_KEY
     - make lint
+    - make migrate
     - make test
 
 after_script:

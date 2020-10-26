@@ -4,6 +4,8 @@ install:
 lint:
 		poetry run flake8 \
 			--exclude .git,__pycache__,migrations,staticfiles
+migrate:
+        poetry run python manage.py migrate
 
 test:
 		coverage run --source='.' manage.py test
