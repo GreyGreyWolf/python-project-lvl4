@@ -6,11 +6,12 @@ services:
 
 env:
   global:
-    - CC_TEST_REPORTER_ID=f5d78b7f43c063721b85818800cc3670dc89c4cd22d1efb421ccac608f9a60eb
-    - SECRET_KEY=1q2w3e4rQ
+	- CC_TEST_REPORTER_ID=f5d78b7f43c063721b85818800cc3670dc89c4cd22d1efb421ccac608f9a60eb
+	- SECRET_KEY=1q2w3e4rQ
 
 before_install:
   - pip install poetry
+  - psql -c 'create database travis_ci_test;' -U postgres
 
 install:
   - make install
@@ -21,9 +22,9 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-    - make lint
-    - make migrate
-    - make test
+	- make lint
+	- make migrate
+	- make test
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
