@@ -7,17 +7,16 @@ lint:
 migrate:
 		poetry run python manage.py migrate
 
+start: migrate
+		poetry run python manage.py runserver 0.0.0.0:8000
+
+setup: migrate
+		poetry run python manage.py createsuperuser
+
+shell:
+		poetry run python manage.py shell
+
 test:
 		coverage run --source='.' manage.py test
 		coverage report
 		coverage xml
-
-runserver:
-		poetry run python3 manage.py runserver
-
-runshell:
-		poetry run python3 manage.py shell
-
-migrate:
-		poetry run python3 manage.py makemigrations
-		poetry run python3 manage.py migrate
