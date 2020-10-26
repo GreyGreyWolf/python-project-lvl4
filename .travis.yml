@@ -1,35 +1,26 @@
+
 language: python
 python: 3.8
-
-services:
-  - postgresql
 
 env:
   global:
 	- CC_TEST_REPORTER_ID=f5d78b7f43c063721b85818800cc3670dc89c4cd22d1efb421ccac608f9a60eb
-	- SECRET_KEY=1q2w3e4rQ
+
+before_install:
+  - pip install poetry
+
+install:
+  - make install
+
 
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
-install: make
-
-before_install:
-  - pip3 install poetry
-  - psql -c 'create database travis_ci_test;' -U postgres
-
-install:
-  - make install
-
 script:
-  - make migrate
   - make lint
-  - make coverage
+  - make test
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-
-notifications:
-  email: false
