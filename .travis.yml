@@ -19,7 +19,6 @@ before_script:
 
 script:
     - make lint
-    - make migrate
     - make test
 
 after_script:
