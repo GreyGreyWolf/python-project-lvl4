@@ -17,8 +17,8 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
+    - export SECRET_KEY=$SECRET_KEY
     - make lint
-    - make migrate
     - make test
 
 after_script:
