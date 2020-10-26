@@ -2,10 +2,13 @@ install:
 	poetry install
 
 lint:
-	poetry run flake8 task_manager/
+	poetry run flake8 \
+		   --exclude .git,__pycache__,migrations,staticfiles
 
 test:
-	poetry run pytest --cov-report=xml --cov=tasks tests.py
+    coverage run --source='.' manage.py test
+    coverage report
+	coverage xml
 
 runserver:
 	poetry run python3 manage.py runserver

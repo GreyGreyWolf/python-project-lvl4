@@ -1,4 +1,4 @@
-from tasks.models import Taskstatus, Tag, Task, User
+from tasks.models import Taskstatus, Tag, Task
 from tasks.filter import TaskFilter
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView

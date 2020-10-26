@@ -1,7 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
-from .forms import UserRegistrationForm, LoginForm
+from .forms import UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -17,16 +15,15 @@ def register(request):
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
             return render(request,
-                         'register_done.html',
-                         {'new_user': new_user})
+                          'register_done.html',
+                          {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
-    return render(request,'registration/signup.html',{'user_form': user_form})
+    return render(request,
+                  'registration/signup.html',
+                  {'user_form': user_form})
 
 
 @login_required
 def dashboard(request):
     return render(request, 'dashboard.html', {'section': 'dashboard'})
-
-
-
