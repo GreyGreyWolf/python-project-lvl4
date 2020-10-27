@@ -3,25 +3,21 @@ from django.urls import reverse_lazy
 from django.test import Client, TestCase
 from faker import Faker
 from faker.generator import Generator
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 
-class SuccessRegistrationTest(TestCase):
+class SigninTest(TestCase):
 
-    def setUp(self):
-        self.client: Client = Client()
-        self.faker: Generator = Faker()
+    @classmethod
+    def setUpTestData(cls):
+        User.objects.create_user(
+            username='test', password='12test12', email='test@example.com')
 
-    def test(self):
-        email: str = self.faker.email()
-        fake_password: str = self.faker.password(length=10)
-        user_name: str = self.faker.user_name()
-        response: TemplateResponse = self.client.post(
-            reverse_lazy('auth:registration'),
-            data={
-                'email': email,
-                'username': user_name,
-                'password1': fake_password,
-                'password2': fake_password,
-            },
-        )
-        self.assertRedirects(response, reverse_lazy('login'))
+    def test_wrong_username(self):
+        user = authenticate(username='wrong', password='12test12')
+        self.assertFalse(user is not None and user.is_authenticated)
+
+    def test_wrong_password(self):
+        user = authenticate(username='test', password='wrong')
+        self.assertFalse(user is not None and user.is_authenticated)
