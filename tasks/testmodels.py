@@ -58,10 +58,6 @@ class TasksModelTest(TestCase):
         Tag.objects.create(name='test')
         Task.objects.create(name='testtask',
                             decription='test',
-                            status=Taskstatus,
-                            creator=User,
-                            assigned_to=User,
-                            tags=Tag
                             )
 
     def test_task_name_label(self):
