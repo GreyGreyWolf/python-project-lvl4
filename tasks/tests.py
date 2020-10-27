@@ -1,7 +1,6 @@
 from django.template.response import TemplateResponse
 from django.urls import reverse_lazy
 from django.test import Client, TestCase
-from auth.models import SiteUser
 from faker import Faker
 from faker.generator import Generator
 
@@ -26,9 +25,3 @@ class SuccessRegistrationTest(TestCase):
             },
         )
         self.assertRedirects(response, reverse_lazy('login'))
-        self.assertTrue(
-            SiteUser.objects.filter(email=email, username=user_name),
-        )
-
-
-
