@@ -8,7 +8,7 @@ class TaskstatusModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Taskstatus.object.create(name='Teststatus')
+        Taskstatus.objects.create(name='Teststatus')
 
     def test_tag_name_label(self):
         taskstatus = Taskstatus.objects.get(id=1)
