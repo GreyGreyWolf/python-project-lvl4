@@ -1,14 +1,14 @@
 install:
-        python3 -m poetry install
+        python poetry install
 lint:
-        python3 -m poetry run flake8
+        python poetry run flake8
 test:
-        python3 -m poetry run coverage run --source='.' --omit '.venv/*' manage.py test
-        python3 -m poetry run coverage report
-        python3 -m poetry run coverage xml
+        python poetry run coverage run --source='.' --omit '.venv/*' manage.py test
+        python poetry run coverage report
+        python poetry run coverage xml
 
 run:
-        python3 -m poetry run python manage.py runserver
+        python poetry run python manage.py runserver
 
 requirements:
-        python3 -m poetry export -f requirements.txt -o requirements.txt
+        python poetry export -f requirements.txt -o requirements.txt
