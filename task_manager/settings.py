@@ -84,11 +84,12 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 
 # Database
-DATABASES = {}
-DATABASE_URL = os.getenv("DATABASE_URL")
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-
-CONN_MAX_AGE = 500
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Use the DATABASE_URL environment variable
 # https://pypi.org/project/dj-database-url/
