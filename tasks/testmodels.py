@@ -78,8 +78,8 @@ class TasksModelTest(TestCase):
         task = Task.objects.get(id=1)
         expected_object_name = '%s, %s, %s, %s, %s, %s' % (task.name,
                                                            task.description,
-                                                           task.status,
-                                                           task.creator,
-                                                           task.task.assigned_to,
-                                                           task.tags)
+                                                           Taskstatus,
+                                                           User,
+                                                           User,
+                                                           Tag)
         self.assertEquals(expected_object_name, str(task))
