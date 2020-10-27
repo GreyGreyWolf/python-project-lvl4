@@ -54,10 +54,8 @@ class TasksModelTest(TestCase):
     def setUpTestData(cls):
         Task.objects.create(name='Testtask',
                             decription='test',
-                            status='test',
                             creator='test',
                             assigned_to='test',
-                            tags='test'
                             )
 
     def test_task_name_label(self):
@@ -74,8 +72,7 @@ class TasksModelTest(TestCase):
         task = Task.objects.get(id=1)
         expected_object_name = '%s, %s, %s, %s, %s, %s' % (task.name,
                                                            task.description,
-                                                           task.status,
                                                            task.creator,
                                                            task.task.assigned_to,
-                                                           task.tags)
+                                                           )
         self.assertEquals(expected_object_name, str(task))
