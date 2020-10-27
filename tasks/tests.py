@@ -12,7 +12,7 @@ class TaskTest(TestCase):
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='user',
-            password='1q2w3e4r5tqgit',
+            password='1q2w3e4r5T',
         )
         self.client = Client()
 
