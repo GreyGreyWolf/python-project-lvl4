@@ -20,6 +20,11 @@ class TaskstatusModelTest(TestCase):
         max_length = taskstatus._meta.get_field('name').max_length
         self.assertEquals(max_length, 100)
 
+    def test_object_name(self):
+        taskstatus = Taskstatus.objects.get(id=1)
+        expected_object_name = '%s' % taskstatus.name
+        self.assertEquals(expected_object_name, str(taskstatus))
+
 
 class TagModelTest(TestCase):
 
@@ -35,14 +40,25 @@ class TagModelTest(TestCase):
     def test_tag_name_max_length(self):
         tag = Tag.objects.get(id=1)
         max_length = tag._meta.get_field('name').max_length
-        self.assertEquals(max_length, 100)
+        self.assertEquals(max_length, 20)
+
+    def test_object_name(self):
+        tag = Tag.objects.get(id=1)
+        expected_object_name = '%s' % tag.name
+        self.assertEquals(expected_object_name, str(tag))
 
 
 class TasksModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Task.objects.create(name='Testtask')
+        Task.objects.create(name='Testtask',
+                            decription='test',
+                            status='test',
+                            creator='test',
+                            assigned_to='test',
+                            tags='test'
+                            )
 
     def test_task_name_label(self):
         task = Task.objects.get(id=1)
@@ -59,7 +75,7 @@ class TasksModelTest(TestCase):
         expected_object_name = '%s, %s, %s, %s, %s, %s' % (task.name,
                                                            task.description,
                                                            task.status,
-                                                           task.creaotr,
+                                                           task.creator,
                                                            task.task.assigned_to,
                                                            task.tags)
         self.assertEquals(expected_object_name, str(task))
