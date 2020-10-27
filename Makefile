@@ -10,6 +10,3 @@ test:
 
 run:
 		poetry run python manage.py runserver
-
-requirements:
-		poetry export -f requirements.txt -o requirements.txt
