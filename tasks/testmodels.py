@@ -2,6 +2,7 @@ from django.test import TestCase
 from faker import Faker
 from faker.generator import Generator
 from tasks.models import Tag, Taskstatus, Task
+from django.contrib.auth.models import User
 
 
 class TaskstatusModelTest(TestCase):
@@ -52,10 +53,15 @@ class TasksModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Task.objects.create(name='Testtask',
+        User.objects.create(username='test')
+        Taskstatus.objects.create(name='test')
+        Tag.objects.create(name='test')
+        Task.objects.create(name='testtask',
                             decription='test',
-                            creator='test',
-                            assigned_to='test',
+                            status=Taskstatus,
+                            creator=User,
+                            assigned_to=User,
+                            tags=Tag
                             )
 
     def test_task_name_label(self):
@@ -72,7 +78,8 @@ class TasksModelTest(TestCase):
         task = Task.objects.get(id=1)
         expected_object_name = '%s, %s, %s, %s, %s, %s' % (task.name,
                                                            task.description,
+                                                           task.status,
                                                            task.creator,
                                                            task.task.assigned_to,
-                                                           )
+                                                           task.tags)
         self.assertEquals(expected_object_name, str(task))
