@@ -28,7 +28,7 @@ class TagModelTest(TestCase):
         Tag.objects.create(name='Testtag')
 
     def test_tag_name_label(self):
-        tag = Taskstatus.objects.get(id=1)
+        tag = Tag.objects.get(id=1)
         field_label = tag._meta.get_field('name').verbose_name
         self.assertEquals(field_label, 'name')
 
