@@ -1,6 +1,4 @@
 from django.test import TestCase
-from faker import Faker
-from faker.generator import Generator
 from tasks.models import Tag, Taskstatus, Task
 from django.contrib.auth.models import User
 
