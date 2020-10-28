@@ -25,18 +25,16 @@ class Task(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(max_length=128, blank=True)
     status = models.ForeignKey(Taskstatus, default=1, on_delete=models.CASCADE,
-                              related_name='statuses')
+                               related_name='statuses')
     creator = models.ForeignKey(User, on_delete=models.CASCADE,
-                                    related_name ="creators")
+                                related_name="creators")
     assigned_to = models.ForeignKey(User, on_delete=models.CASCADE,
-                                    related_name ="assigned_to")
+                                    related_name="assigned_to")
     tags = models.ManyToManyField(Tag, related_name="tags")
 
     def __str__(self):
         return self.name
 
-
     class Meta:
         verbose_name = "Task"
         verbose_name_plural = "Tasks"
-
